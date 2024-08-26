@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "main": "server.ts",
   "scripts": {
-    "dev": "nodemon src/server.ts"
+    "dev": "nodemon src/server.ts",
+    "start": "npm run build && npm run serve",
+    "serve": "node -r dotenv/config dist/server.js",
+    "build": "npm run clean && npm run build-ts",
+    "clean": "rimraf ./build",
+    "build-ts": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +26,7 @@
     "nodemailer": "^6.9.14",
     "nodemon": "^3.1.4",
     "randomatic": "^3.1.1",
+    "rimraf": "^6.0.1",
     "status-codes": "^0.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
