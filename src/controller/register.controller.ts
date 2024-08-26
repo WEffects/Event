@@ -48,7 +48,7 @@ class Register {
                 ticketCode
             })
 
-            if (registered?.confirm) {
+            if (registered) {
                 registered.confirm = true
                 await registered.save()
             }
