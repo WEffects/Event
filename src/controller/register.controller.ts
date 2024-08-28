@@ -49,8 +49,11 @@ class Register {
             })
 
             if (registered) {
+                // if(registered.confirm) return res.status(400).json({message: "Ticket already confirmed"})
                 registered.confirm = true
                 await registered.save()
+                console.log(await sendMail())
+
             }
             else{
                 return res.status(400).json({message: "Ticket Id not found"})
