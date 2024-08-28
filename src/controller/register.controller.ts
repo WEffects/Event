@@ -6,7 +6,7 @@ class Register {
     public async register(req: any, res: Response) {
 
         try {
-            const { name, email, phone, ticketType, totalTickets, totalPrice } = req.body
+            const { name, email, phone, ticketType, totalTickets, totalPrice, transactionId } = req.body
             const ticketCode = req.ticketCode
             const register = new registerModel({
                 name,
@@ -16,6 +16,7 @@ class Register {
                 totalPrice,
                 phone,
                 ticketCode,
+                transactionId
             })
 
             await register.save()
@@ -26,36 +27,27 @@ class Register {
         }
     }
 
-    public async getRegistered(req: Request, res: Response) {
-        const { ticketCode } = req.params
-        try {
-            const registered = await registerModel.findOne({
-                ticketCode
-            })
-
-            res.status(200).json(registered)
-        }
-        catch (error: any) {
-            console.log(error)
-            res.status(400).json({ error: error.message })
-        }
-    }
-
     public async confirmRegisteration(req: Request, res: Response) {
-        const { ticketCode } = req.params
+        const { transactionId } = req.params
         try {
             const registered = await registerModel.findOne({
-                ticketCode
+                transactionId
             })
 
-            if (registered) {
-                registered.confirm = true
-                await registered.save()
-            }
-            else{
-                return res.status(400).json({message: "Ticket Id not found"})
-            }
-            res.status(200).json({ticket:"confirm"})
+            if(!registered) return res.status(400).json({error: "No registration found"})
+
+            registered.confirm = true
+            await registered.save()
+
+            const confirmed = await registerModel.find({
+                confirm: true
+            })
+
+            const ticketCode = confirmed.length.toString().padStart(6, "0")
+            registered.ticketCode = ticketCode
+            await registered.save()
+
+            res.status(201).json({ticketCode})
         }
         catch (error: any) {
             res.status(400).json({ error: error.message })
