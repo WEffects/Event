@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import registerModel from '../models/registered.user.model'
 import { sendMail } from '../services/send.email.service'
+import { generateQR } from '../services/generate.qr'
 
 class Register {
     public async register(req: any, res: Response) {
@@ -47,12 +48,13 @@ class Register {
             const registered = await registerModel.findOne({
                 ticketCode
             })
-
+  
             if (registered) {
-                // if(registered.confirm) return res.status(400).json({message: "Ticket already confirmed"})
+                if(registered.confirm) return res.status(400).json({message: "Ticket already confirmed"})
                 registered.confirm = true
                 await registered.save()
-                console.log(await sendMail())
+                await generateQR(ticketCode)
+                console.log(await sendMail(ticketCode, registered.email))
 
             }
             else{
@@ -65,15 +67,15 @@ class Register {
         }
     }
 
-    public async email(req:Request, res:Response){
-        try{
-            console.log(await sendMail())
-            res.json("sent")
-        }
-        catch(error:any){
-            res.status(400).json({error: error.message})
-        }
-    }
+    // public async email(req:Request, res:Response){
+    //     try{
+    //         console.log(await sendMail("test"))
+    //         res.json("sent")
+    //     }
+    //     catch(error:any){
+    //         res.status(400).json({error: error.message})
+    //     }
+    // }
 }
 
 
