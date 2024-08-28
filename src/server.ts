@@ -8,7 +8,9 @@ const app = express()
 app.use(express.json())
 Appmodule(app)
 
-app.listen(configs.port, async () => {
+const port = configs.port || 5000;
+
+app.listen(port, async () => {
     console.log("Application running")
     try {
         await connectDB(configs.dbUri as string)
