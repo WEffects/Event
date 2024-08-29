@@ -7,7 +7,7 @@ const app = express()
 
 app.use(express.json())
 Appmodule(app)
-
+app.use(express.static('public'))
 const port = configs.port || 5000;
 
 app.listen(port, async () => {
