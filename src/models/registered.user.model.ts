@@ -17,6 +17,21 @@ const registrationSchema = new Schema<IRegister & Document>({
         min: 10,
         max: 10
     },
+    transactionId:{
+        type:String,
+        required:true,
+        unique: true
+    },
+    attendence:{
+        type:String,
+        required:false,
+        enum: ["present","absent"],
+        default: "absent"
+    },
+    checkInTime:{
+        type:Date,
+        required:false
+    },
     ticketType: {
         type: String,
         required: true,
@@ -32,7 +47,7 @@ const registrationSchema = new Schema<IRegister & Document>({
     },
     ticketCode:{
         type:String,
-        required:true,
+        required:false,
         unique:true,
     },
     registerAt: {
