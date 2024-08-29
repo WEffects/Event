@@ -44,11 +44,12 @@ class Register {
                 confirm: true
             })
 
-  
+          
             if (registered) {
                 if(registered.confirm) return res.status(400).json({message: "Ticket already confirmed"})
                 registered.confirm = true
                 await registered.save()
+                const ticketCode = registered.ticketCode
                 await generateQR(ticketCode)
                 console.log(await sendMail(ticketCode, registered.email))
 
