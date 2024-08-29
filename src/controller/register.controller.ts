@@ -37,14 +37,13 @@ class Register {
 
             if(!registered) return res.status(400).json({error: "No registration found"})
 
-            registered.confirm = true
-            await registered.save()
+            // registered.confirm = true
+            // await registered.save()
 
-            const confirmed = await registerModel.find({
-                confirm: true
-            })
+            // const confirmed = await registerModel.find({
+            //     confirm: true
+            // })
 
-          
             if (registered) {
                 if(registered.confirm) return res.status(400).json({message: "Ticket already confirmed"})
                 registered.confirm = true
@@ -60,11 +59,11 @@ class Register {
             res.status(200).json({ticket:"confirm"})
 
 
-            const ticketCode = confirmed.length.toString().padStart(6, "0")
-            registered.ticketCode = ticketCode
-            await registered.save()
+            // const ticketCode = confirmed.length.toString().padStart(6, "0")
+            // registered.ticketCode = ticketCode
+            // await registered.save()
 
-            res.status(201).json({ticketCode})
+            // res.status(201).json({ticketCode})
         }
         catch (error: any) {
             res.status(400).json({ error: error.message })
