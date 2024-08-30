@@ -36,19 +36,19 @@ class Admin {
         }
     }
 
-    public async getUserByTransactionID(req: Request, res: Response) {
-        const { transactionId } = req.params
+    // public async getUserByTransactionID(req: Request, res: Response) {
+    //     const { transactionId } = req.params
 
-        const registered = await registerModel.findOne({
-            transactionId: transactionId
-        })
+    //     const registered = await registerModel.findOne({
+    //         transactionId: transactionId
+    //     })
 
-        if (!registered) {
-            return res.status(400).json({ error: "No transaction found" })
-        }
+    //     if (!registered) {
+    //         return res.status(400).json({ error: "No transaction found" })
+    //     }
 
-        res.status(200).json(registered)
-    }
+    //     res.status(200).json(registered)
+    // }
 
     public async attendence(req: Request, res: Response) {
 

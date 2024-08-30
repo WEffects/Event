@@ -2,7 +2,6 @@ export interface IRegister {
     name: string[];
     email: string;
     phone: string;
-    transactionId: string;
     attendence: string;
     checkInTime: Date;
     ticketType: string;

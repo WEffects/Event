@@ -83,13 +83,13 @@ export const sendMail = async (serialNumber: string, email: string) => {
         </body>
         </html>
         `,
-    attachments: [
-      {
-        filename: "qr-code.png",
-        path: "./public/uploads/AsLKdHE.jpg",
-        cid: "qr-code", // This is optional if you want to embed the image in the email
-      },
-    ],
+    // attachments: [
+    //   {
+    //     filename: "qr-code.png",
+    //     path: "./public/uploads/AsLKdHE.jpg",
+    //     cid: "qr-code", // This is optional if you want to embed the image in the email
+    //   },
+    // ],
   });
 
   return info.messageId;

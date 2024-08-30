@@ -7,7 +7,7 @@ class Register {
     public async register(req: any, res: Response) {
 
         try {
-            const { name, email, phone, ticketType, totalTickets, totalPrice, transactionId } = req.body
+            const { name, email, phone, ticketType, totalTickets, totalPrice } = req.body
             const ticketCode = req.ticketCode
             const register = new registerModel({
                 name,
@@ -17,14 +17,13 @@ class Register {
                 totalPrice,
                 phone,
                 ticketCode,
-                transactionId
             })
-
+            
             await register.save()
 
             res.status(200).json(register)
         } catch (error: any) {
-            res.status(400).json({ error: error.message })
+             res.status(400).json({ error: error.message })
         }
     }
     
@@ -50,7 +49,7 @@ class Register {
             }
     
             if (registered.confirm) {
-                return res.status(400).json({ message: "Ticket already confirmed" });
+                return res.status(200).json({ message: "Ticket already confirmed" });
             }
     
             // Count the number of confirmed registrations
