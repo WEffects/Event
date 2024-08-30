@@ -60,6 +60,10 @@ const registrationSchema = new Schema<IRegister & Document>({
     confirm:{
         type:Boolean,
         default:false
+    },
+    entered:{
+        type:Boolean,
+        default:false
     }
 })
 

@@ -22,6 +22,8 @@ router.post('/registered', upload.single('file'), registerController.register.bi
 router.get('/get-registered', registerController.getAllRegistered.bind(registerController))
 // router.get('/get-registered/:ticketCode', registerController.getRegistered.bind(registerController))
 router.put('/confirm/:ticketCode', registerController.confirmRegistration.bind(registerController))
+router.put('/enter/:ticketCode', registerController.confirmEntry.bind(registerController))
+
 // router.post('/email', registerController.email.bind(registerController))
 
 export default router

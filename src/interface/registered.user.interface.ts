@@ -11,5 +11,6 @@ export interface IRegister {
     ticketImageUrl: string;
     serialNumber: string;
     registerAt: Date;
-    confirm: boolean
+    confirm: boolean;
+    entered: boolean;
 }

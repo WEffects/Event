@@ -98,7 +98,30 @@ class Register {
             res.status(400).json({ error: error.message });
         }
     }
+    public async confirmEntry(req: Request, res: Response) {
+        const { ticketCode } = req.params;
     
+        try {
+            // Fetch the registration by ticketCode
+            const registered = await registerModel.findOne({ ticketCode });
+    
+            if (!registered) {
+                return res.status(400).json({ error: "No registration found" });
+            }
+            if(!registered.confirm){
+                return res.status(400).json({ error: "Ticket not confirmed" });
+            }
+            if (registered.entered) {
+                return res.status(200).json({ message: "User already Entered" });
+            }
+            registered.entered = true;
+             await registered.save();
+    
+            res.status(200).json({ entry:true });
+        } catch (error: any) {
+            res.status(400).json({ error: error.message });
+        }
+    }
     // public async email(req:Request, res:Response){
     //     try{
     //         console.log(await sendMail("test"))
