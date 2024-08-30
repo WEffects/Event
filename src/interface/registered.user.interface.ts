@@ -8,6 +8,7 @@ export interface IRegister {
     totalTickets: number;
     totalPrice: number;
     ticketCode: string;
+    ticketImageUrl: string;
     serialNumber: string;
     registerAt: Date;
     confirm: boolean

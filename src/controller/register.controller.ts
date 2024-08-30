@@ -1,14 +1,36 @@
 import { NextFunction, Request, Response } from 'express'
 import registerModel from '../models/registered.user.model'
 import { sendMail } from '../services/send.email.service'
-import { generateQR } from '../services/generate.qr'
-
+import { v2 as cloudinary } from 'cloudinary';
+import fs from 'fs';
 class Register {
     public async register(req: any, res: Response) {
-
+        
+        cloudinary.config({ 
+            cloud_name: 'dimvweshf', 
+            api_key: '165572374276785', 
+            api_secret: 'vW_9wXPk_Ag5G6IQRghZGYYSj2s' // Click 'View API Keys' above to copy your API secret
+        });
+       
         try {
-            const { name, email, phone, ticketType, totalTickets, totalPrice } = req.body
+            const { name, email, phone, ticketType, totalTickets, totalPrice } = req.body;
             const ticketCode = req.ticketCode
+            if (!req.file) {
+                throw new Error("No file uploaded");
+            }
+    
+            // Upload file to Cloudinary
+            const uploadResult = await cloudinary.uploader.upload(req.file.path, {
+                public_id: ticketCode,
+            });
+    
+             // Delete the file from local storage after successful upload
+            fs.unlink(req.file.path, (err) => {
+                if (err) {
+                    console.error('Error deleting file:', err);
+                }
+            });
+
             const register = new registerModel({
                 name,
                 email,
@@ -17,6 +39,7 @@ class Register {
                 totalPrice,
                 phone,
                 ticketCode,
+                ticketImageUrl: uploadResult.secure_url
             })
             
             await register.save()

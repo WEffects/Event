@@ -45,6 +45,10 @@ const registrationSchema = new Schema<IRegister & Document>({
         required:false,
         unique:true,
     },
+    ticketImageUrl:{
+        type:String,
+        required:false
+    },
     serialNumber: {
         type: String,
         required: false
