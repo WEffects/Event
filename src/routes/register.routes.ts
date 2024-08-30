@@ -10,7 +10,7 @@ const storage = diskStorage({
         cb(null, 'public/uploads/')
     },
     filename: (req:any, file, cb) => {
-        const ticketCode = Ramdomize('Aa0!', 7, { exclude: ".,/`'~!_*(){}[]|+-=" })
+        const ticketCode = Ramdomize('Aa0', 7, { exclude: ".,/`'~!_*(){}[]|+-=" })
         req.ticketCode = ticketCode
         cb(null, `${ticketCode}.jpg`)
     }
