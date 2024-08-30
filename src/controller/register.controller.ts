@@ -68,7 +68,7 @@ class Register {
             await registered.save();
     
             // Send email with the serial number
-            // console.log(await sendMail(registered.serialNumber, registered.email));
+            console.log(await sendMail(registered.serialNumber, registered.email));
     
             res.status(200).json({ ticket: "confirm" });
         } catch (error: any) {
