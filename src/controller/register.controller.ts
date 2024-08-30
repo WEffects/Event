@@ -28,40 +28,45 @@ class Register {
         }
     }
 
-    public async confirmRegisteration(req: Request, res: Response) {
-        const { ticketCode } = req.params
+    public async confirmRegistration(req: Request, res: Response) {
+        const { ticketCode } = req.params;
+    
         try {
-            const registered = await registerModel.findOne({
-                ticketCode
-            })
-
-            if(!registered) return res.status(400).json({error: "No registration found"})
-
-            const confirmed = await registerModel.find({
-                confirm: true
-            })
-
-            if (registered) {
-                // if(registered.confirm) return res.status(400).json({message: "Ticket already confirmed"})
-                registered.confirm = true
-                // await generateQR(ticketCode)
-               
-                registered.serialNumber = registered.name[0].slice(0, 3).toUpperCase() + (confirmed.length + 1).toString().padStart(6, "0");
-                console.log("serialnumber",registered.serialNumber);
-                await registered.save()
-                 
-                console.log(await sendMail(registered.serialNumber, registered.email))
+            // Fetch the registration by ticketCode
+            const registered = await registerModel.findOne({ ticketCode });
+    
+            if (!registered) {
+                return res.status(400).json({ error: "No registration found" });
             }
-            else{
-                return res.status(400).json({message: "Ticket Id not found"})
+    
+            if (registered.confirm) {
+                return res.status(400).json({ message: "Ticket already confirmed" });
             }
-            res.status(200).json({ticket:"confirm"})
-        }
-        catch (error: any) {
-            res.status(400).json({ error: error.message })
+    
+            // Count the number of confirmed registrations
+            const confirmedCount = await registerModel.countDocuments({ confirm: true });
+    
+            // Confirm the registration
+            registered.confirm = true;
+    
+            // Generate serial number with prefix based on the first three characters of the name (default to 'XXX' if name is not available)
+            const namePrefix = (registered.name[0] && registered.name[0].length >= 3) ? registered.name[0].slice(0, 3).toUpperCase() : 'XXX';
+            registered.serialNumber = namePrefix + (confirmedCount + 1).toString().padStart(6, "0");
+            
+            console.log("serialnumber",registered.serialNumber);
+            
+            // Save the updated registration
+            await registered.save();
+    
+            // Send email with the serial number
+            console.log(await sendMail(registered.serialNumber, registered.email));
+    
+            res.status(200).json({ ticket: "confirm" });
+        } catch (error: any) {
+            res.status(400).json({ error: error.message });
         }
     }
-
+    
     // public async email(req:Request, res:Response){
     //     try{
     //         console.log(await sendMail("test"))
