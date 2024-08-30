@@ -69,12 +69,10 @@ export const sendMail = async (serialNumber: string, email: string) => {
                 <div class="content">
                     <p>Hey there,</p>
                     <p>Your ticket has been successfully confirmed. We are excited to have you with us!</p>
-                    <p>Please find your ticket details and the QR code below.</p>
+                    <p>Please find your ticket details below.</p>
                     <p>Ticket Code: ${serialNumber}</p>
                 </div>
-                <div class="content">
-                    <p>Make sure to bring this QR code with you to the event. It will be required for entry.</p>
-                </div>
+               
                 <div class="footer">
                     <p>Thank you for choosing our service!</p>
                     <p>If you have any questions, feel free to <a href="mailto:ys1997642@gmail.com">contact us</a>.</p>
