@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-export const sendMail = async (ticketCode: string, email: string) => {
+export const sendMail = async (serialNumber: string, email: string) => {
   
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -70,7 +70,7 @@ export const sendMail = async (ticketCode: string, email: string) => {
                     <p>Hey there,</p>
                     <p>Your ticket has been successfully confirmed. We are excited to have you with us!</p>
                     <p>Please find your ticket details and the QR code below.</p>
-                    <p>Ticket Code: ${ticketCode}</p>
+                    <p>Ticket Code: ${serialNumber}</p>
                 </div>
                 <div class="content">
                     <p>Make sure to bring this QR code with you to the event. It will be required for entry.</p>
@@ -86,7 +86,7 @@ export const sendMail = async (ticketCode: string, email: string) => {
     attachments: [
       {
         filename: "qr-code.png",
-        path: "./public/qr/" + ticketCode + ".jpg",
+        path: "./public/uploads/AsLKdHE.jpg",
         cid: "qr-code", // This is optional if you want to embed the image in the email
       },
     ],

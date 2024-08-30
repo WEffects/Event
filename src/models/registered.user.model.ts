@@ -17,11 +17,6 @@ const registrationSchema = new Schema<IRegister & Document>({
         min: 10,
         max: 10
     },
-    transactionId:{
-        type:String,
-        required:true,
-        unique: true
-    },
     attendence:{
         type:String,
         required:false,
@@ -49,6 +44,11 @@ const registrationSchema = new Schema<IRegister & Document>({
         type:String,
         required:false,
         unique:true,
+    },
+    serialNumber: {
+        type: String,
+        required: false,
+        unique: true
     },
     registerAt: {
         type: Date,

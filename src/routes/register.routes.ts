@@ -21,7 +21,7 @@ const upload = multer({ storage })
 router.post('/registered', upload.single('file'), registerController.register.bind(registerController))
 
 // router.get('/get-registered/:ticketCode', registerController.getRegistered.bind(registerController))
-router.put('/confirm/:transactionId', registerController.confirmRegisteration.bind(registerController))
+router.put('/confirm/:ticketCode', registerController.confirmRegisteration.bind(registerController))
 // router.post('/email', registerController.email.bind(registerController))
 
 export default router

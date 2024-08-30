@@ -9,6 +9,7 @@ export interface IRegister {
     totalTickets: number;
     totalPrice: number;
     ticketCode: string;
+    serialNumber: string;
     registerAt: Date;
     confirm: boolean
 }
