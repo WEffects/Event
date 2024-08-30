@@ -19,7 +19,7 @@ const storage = diskStorage({
 const upload = multer({ storage })
 
 router.post('/registered', upload.single('file'), registerController.register.bind(registerController))
-
+router.get('/get-registered', registerController.getAllRegistered.bind(registerController))
 // router.get('/get-registered/:ticketCode', registerController.getRegistered.bind(registerController))
 router.put('/confirm/:ticketCode', registerController.confirmRegistration.bind(registerController))
 // router.post('/email', registerController.email.bind(registerController))

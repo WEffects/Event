@@ -27,7 +27,17 @@ class Register {
             res.status(400).json({ error: error.message })
         }
     }
+    
 
+    public async getAllRegistered(req: Request, res: Response) {
+        try {
+            const registered = await registerModel.find()
+            res.status(200).json({ registered })
+
+        } catch (error: any) {
+            res.status(400).json({ error: error.message })
+        }
+    }
     public async confirmRegistration(req: Request, res: Response) {
         const { ticketCode } = req.params;
     
