@@ -69,7 +69,7 @@ export const sendMail = async (serialNumber: string, email: string) => {
                 <div class="content">
                     <p>Hey there,</p>
                     <p>Your ticket has been successfully confirmed. We are excited to have you with us!</p>
-                    <p>Please find your ticket details below.</p>
+                    <p>Please find your ticket and its details below.</p>
                     <p>Ticket Code: ${serialNumber}</p>
                 </div>
                
@@ -83,8 +83,8 @@ export const sendMail = async (serialNumber: string, email: string) => {
         `,
     attachments: [
       {
-        filename: "qr-code.png",
-        path: "./public/dummy/dummy.jpg",
+        filename: "ticket.jpeg",
+        path: "./public/ticket/ticket3.jpeg",
         cid: "qr-code", // This is optional if you want to embed the image in the email
       },
     ],
