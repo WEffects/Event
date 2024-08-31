@@ -30,7 +30,7 @@ const registrationSchema = new Schema<IRegister & Document>({
     ticketType: {
         type: String,
         required: true,
-        enum: ["clouds","love_rays","bows","arrows", "third_eye","crown"]
+        enum: ['clouds','love_rays','bows','arrows','third_eye','crown','Early Birds', 'Stag', 'Couple', 'Vip', 'Vvip', 'Backstage', '5Stags']
     },
     totalTickets: {
         type: Number,
