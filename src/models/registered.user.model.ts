@@ -52,7 +52,8 @@ const registrationSchema = new Schema<IRegister & Document>({
     serialNumber: {
         type: String,
         required: false,
-        unique: true
+        unique: true,
+        sparse: true
       },
     registerAt: {
         type: Date,
