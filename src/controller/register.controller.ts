@@ -13,7 +13,7 @@ class Register {
         });
        
         try {
-            const { name, email, phone, ticketType, totalTickets, totalPrice } = req.body;
+            const { name, email, phone, ticketType, totalTickets, totalPrice, referralCode } = req.body;
             const ticketCode = req.ticketCode
             if (!req.file) {
                 throw new Error("No file uploaded");
@@ -39,6 +39,7 @@ class Register {
                 totalPrice,
                 phone,
                 ticketCode,
+                referralCode,
                 ticketImageUrl: uploadResult.secure_url
             })
             

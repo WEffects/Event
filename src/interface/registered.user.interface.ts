@@ -5,6 +5,7 @@ export interface IRegister {
     attendence: string;
     checkInTime: Date;
     ticketType: string;
+    referralCode: string;
     totalTickets: number;
     totalPrice: number;
     ticketCode: string;

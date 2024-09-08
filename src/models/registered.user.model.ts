@@ -32,6 +32,11 @@ const registrationSchema = new Schema<IRegister & Document>({
         required: true,
         enum: ['clouds','love_rays','bows','arrows','third_eye','crown','Early Birds', 'Stag', 'Couple', 'Vip', 'Vvip', 'Backstage', '5Stags']
     },
+    referralCode:{
+        type:String,
+        required:false,
+        default:""
+    },
     totalTickets: {
         type: Number,
         required: true
